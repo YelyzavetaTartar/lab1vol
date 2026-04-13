@@ -52,9 +52,9 @@ public partial class DbLibraryContext : DbContext
 
         modelBuilder.Entity<Driver>(entity =>
         {
-            entity.HasKey(e => e.IdVolunteer).HasName("Drivers_pkey");
+            entity.HasKey(e => e.Id).HasName("Drivers_pkey");
 
-            entity.Property(e => e.IdVolunteer)
+            entity.Property(e => e.Id)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("ID_volunteer");
             entity.Property(e => e.DrivingLicenseCategories)
@@ -65,18 +65,18 @@ public partial class DbLibraryContext : DbContext
                 .HasColumnName("driving_license_id");
 
             entity.HasOne(d => d.IdVolunteerNavigation).WithOne(p => p.Driver)
-                .HasForeignKey<Driver>(d => d.IdVolunteer)
+                .HasForeignKey<Driver>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk_drivers_volunteer");
         });
 
         modelBuilder.Entity<GeneralStaff>(entity =>
         {
-            entity.HasKey(e => e.IdVolunteer).HasName("General_Staff_pkey");
+            entity.HasKey(e => e.Id).HasName("General_Staff_pkey");
 
             entity.ToTable("General_Staff");
 
-            entity.Property(e => e.IdVolunteer)
+            entity.Property(e => e.Id)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("ID_volunteer");
             entity.Property(e => e.Experience)
@@ -87,7 +87,7 @@ public partial class DbLibraryContext : DbContext
                 .HasColumnName("type_of_work");
 
             entity.HasOne(d => d.IdVolunteerNavigation).WithOne(p => p.GeneralStaff)
-                .HasForeignKey<GeneralStaff>(d => d.IdVolunteer)
+                .HasForeignKey<GeneralStaff>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk_general_staff_volunteer");
         });
@@ -104,9 +104,9 @@ public partial class DbLibraryContext : DbContext
 
         modelBuilder.Entity<Location>(entity =>
         {
-            entity.HasKey(e => e.LocationId).HasName("Locations_pkey");
+            entity.HasKey(e => e.Id).HasName("Locations_pkey");
 
-            entity.Property(e => e.LocationId).HasColumnName("location_id");
+            entity.Property(e => e.Id).HasColumnName("location_id");
             entity.Property(e => e.Address)
                 .HasMaxLength(50)
                 .HasColumnName("address");
@@ -120,9 +120,9 @@ public partial class DbLibraryContext : DbContext
 
         modelBuilder.Entity<Medic>(entity =>
         {
-            entity.HasKey(e => e.IdVolunteer).HasName("Medics_pkey");
+            entity.HasKey(e => e.Id).HasName("Medics_pkey");
 
-            entity.Property(e => e.IdVolunteer)
+            entity.Property(e => e.Id)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("ID_volunteer");
             entity.Property(e => e.DiplomaNumber)
@@ -133,16 +133,16 @@ public partial class DbLibraryContext : DbContext
                 .HasColumnName("specialization");
 
             entity.HasOne(d => d.IdVolunteerNavigation).WithOne(p => p.Medic)
-                .HasForeignKey<Medic>(d => d.IdVolunteer)
+                .HasForeignKey<Medic>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk_medics_volunteer");
         });
 
         modelBuilder.Entity<Shift>(entity =>
         {
-            entity.HasKey(e => e.ShiftId).HasName("Shifts_pkey");
+            entity.HasKey(e => e.Id).HasName("Shifts_pkey");
 
-            entity.Property(e => e.ShiftId).HasColumnName("shift_id");
+            entity.Property(e => e.Id).HasColumnName("shift_id");
             entity.Property(e => e.EndTime).HasColumnName("end_time");
             entity.Property(e => e.ShiftDate).HasColumnName("shift_date");
             entity.Property(e => e.StartTime).HasColumnName("start_time");
@@ -150,9 +150,9 @@ public partial class DbLibraryContext : DbContext
 
         modelBuilder.Entity<Translator>(entity =>
         {
-            entity.HasKey(e => e.IdVolunteer).HasName("Translators_pkey");
+            entity.HasKey(e => e.Id).HasName("Translators_pkey");
 
-            entity.Property(e => e.IdVolunteer)
+            entity.Property(e => e.Id)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("ID_volunteer");
             entity.Property(e => e.LanguageLevel)
@@ -163,16 +163,16 @@ public partial class DbLibraryContext : DbContext
                 .HasColumnName("language_pair");
 
             entity.HasOne(d => d.IdVolunteerNavigation).WithOne(p => p.Translator)
-                .HasForeignKey<Translator>(d => d.IdVolunteer)
+                .HasForeignKey<Translator>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk_translators_volunteer");
         });
 
         modelBuilder.Entity<Volunteer>(entity =>
         {
-            entity.HasKey(e => e.IdVolunteer).HasName("Volunteers_pkey");
+            entity.HasKey(e => e.Id).HasName("Volunteers_pkey");
 
-            entity.Property(e => e.IdVolunteer).HasColumnName("ID_volunteer");
+            entity.Property(e => e.Id).HasColumnName("ID_volunteer");
             entity.Property(e => e.CountryCode)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("country_code");
