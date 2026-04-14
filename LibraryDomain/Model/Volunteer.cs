@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace LibraryDomain.Model;
 
 public partial class Volunteer: Entity
 {
-    
+
+    [Display(Name="Full name")]
     public string? FullName { get; set; }
 
+    [Display(Name = "Email")]
     public string? Email { get; set; }
 
-    public int CountryCode { get; set; }
+     public int CountryCode { get; set; }
 
+    [Display(Name = "Country Code")]
     public virtual Country CountryCodeNavigation { get; set; } = null!;
 
     public virtual Driver? Driver { get; set; }
