@@ -20,9 +20,9 @@ namespace LibraryVolunteer.Controllers
         }
 
         // GET: Volunteers
-        public async Task<IActionResult> Index(int? id, string? name)
+        public async Task<IActionResult> Index(string? id, string? name)
         {
-            if (id == null) return RedirectToAction("Index","Countries");
+            if (string.IsNullOrEmpty(id)) return RedirectToAction("Index","Countries");
             //знаходження волонтерів за країною
             ViewBag.CountryCode = id;
             ViewBag.CountryName = name;
@@ -51,11 +51,12 @@ namespace LibraryVolunteer.Controllers
         }
 
         // GET: Volunteers/Create
-        public IActionResult Create(int countryCode)
+        public IActionResult Create(string countryCode)
         {
+            if (string.IsNullOrEmpty(countryCode)) return RedirectToAction("Index", "Countries");
             //ViewData["CountryCode"] = new SelectList(_context.Countries, "CountryCode", "CountryCode");
             ViewBag.CountryCode = countryCode;
-            ViewBag.CountryName = _context.Countries.Where(c => c.CountryCode == countryCode).FirstOrDefault()?.CountryName;
+            ViewBag.CountryName = _context.Countries.Where(c => c.CountryCode == countryCode).Select(c => c.CountryName).FirstOrDefault();
             return View();
         }
 
@@ -64,8 +65,10 @@ namespace LibraryVolunteer.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int countryCode, [Bind("Id,FullName,Email")] Volunteer volunteer)
+        public async Task<IActionResult> Create(string countryCode, [Bind("Id,FullName,Email")] Volunteer volunteer)
         {
+            ModelState.Remove("CountryCodeNavigation");
+
             volunteer.CountryCode = countryCode;
             if (ModelState.IsValid)
             {

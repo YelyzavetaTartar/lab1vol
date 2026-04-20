@@ -44,7 +44,8 @@ public partial class DbLibraryContext : DbContext
         {
             entity.HasKey(e => e.CountryCode).HasName("Countries_pkey");
 
-            entity.Property(e => e.CountryCode).HasColumnName("country_code");
+            entity.Property(e => e.CountryCode).HasColumnName("country_code")
+                .ValueGeneratedNever();
             entity.Property(e => e.CountryName)
                 .HasMaxLength(30)
                 .HasColumnName("country_name");

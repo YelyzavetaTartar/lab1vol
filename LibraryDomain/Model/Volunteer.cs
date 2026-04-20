@@ -7,16 +7,17 @@ namespace LibraryDomain.Model;
 
 public partial class Volunteer: Entity
 {
-
+    [Required(ErrorMessage = "Поле не повинно бути порожнім")]
     [Display(Name="Full name")]
     public string? FullName { get; set; }
 
     [Display(Name = "Email")]
     public string? Email { get; set; }
 
-     public int CountryCode { get; set; }
-
     [Display(Name = "Country Code")]
+    public string CountryCode { get; set; } = null!;
+
+    [Display(Name = "Country")]
     public virtual Country CountryCodeNavigation { get; set; } = null!;
 
     public virtual Driver? Driver { get; set; }

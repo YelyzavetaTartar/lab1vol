@@ -7,7 +7,7 @@
 <h1>Волонтери за країною @ViewBag.CountryName </h1>
 
 <p>
-    @Html.ActionLink("Додати нового волонтера", "Create", new { id = ViewBag.CountryCode })
+    @Html.ActionLink("Додати нового волонтера", "Create", new {countryCode = ViewBag.CountryCode})
 </p>
 <table class="table">
     <thead>
